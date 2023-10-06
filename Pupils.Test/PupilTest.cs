@@ -13,7 +13,6 @@ namespace Pupils.Test
     {
 
         [Fact]
-
         public void AgeIsCorrect()
         {
             DateOnly date = new(2007, 10, 31);
@@ -53,18 +52,18 @@ namespace Pupils.Test
         [InlineData(5000, 4001, false)]
         [InlineData(5900, 5001, false)]
         [InlineData(5099, 5001, true)]
-
+        [InlineData(5000, 4901, false)]
         public void TestLivesNearBy(int zip1, int zip2, bool isTrue)
         {
-            DateOnly date = new(2005, 1, 31);
-            Pupil pupil = new("abc", "abc", date);
-            pupil.ZipCode = zip1;
-
-            DateOnly date1 = new(2004, 1, 31);
+            DateOnly date1 = new(2005, 1, 31);
             Pupil pupil1 = new("abc", "abc", date1);
-            pupil1.ZipCode = zip2;
+            pupil1.ZipCode = zip1;
 
-            pupil.LivesNearby(pupil1).Should().Be(isTrue);
+            DateOnly date2 = new(2004, 1, 31);
+            Pupil pupil2 = new("abc", "abc", date2);
+            pupil2.ZipCode = zip2;
+
+            pupil1.LivesNearby(pupil2).Should().Be(isTrue);
         }
     }
 }
